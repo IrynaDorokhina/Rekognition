@@ -1,5 +1,6 @@
 resource "aws_s3_bucket" "images-2522" {
 bucket = "images-2522"
+#prefix = "images"
     tags = {
         Name = "images-2522"
     }
