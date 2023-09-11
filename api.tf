@@ -1,33 +1,28 @@
-resource "aws_api_gateway_rest_api" "API" {
-  name        = "API"
-  description = "This is my API"
+resource "aws_api_gateway_rest_api" "api" {
+  name = "myapi"
 }
 
-resource "aws_api_gateway_resource" "Resource" {
-  rest_api_id = aws_api_gateway_rest_api.API.id
-  parent_id   = aws_api_gateway_rest_api.API.root_resource_id
+resource "aws_api_gateway_resource" "resource" {
   path_part   = "resource"
+  parent_id   = aws_api_gateway_rest_api.api.root_resource_id
+  rest_api_id = aws_api_gateway_rest_api.api.id
 }
 
-resource "aws_api_gateway_method" "Method" {
-  rest_api_id   = aws_api_gateway_rest_api.API.id
-  resource_id   = aws_api_gateway_resource.Resource.id
+resource "aws_api_gateway_method" "method" {
+  rest_api_id   = aws_api_gateway_rest_api.api.id
+  resource_id   = aws_api_gateway_resource.resource.id
   http_method   = "GET"
   authorization = "NONE"
 }
 
-resource "aws_api_gateway_integration" "Integration" {
-  rest_api_id          = aws_api_gateway_rest_api.API.id
-  resource_id          = aws_api_gateway_resource.Resource.id
-  http_method          = aws_api_gateway_method.Method.http_method
-  type                 = "MOCK"
-  cache_key_parameters = ["method.request.path.param"]
-  cache_namespace      = "foobar"
-  timeout_milliseconds = 29000
+resource "aws_api_gateway_integration" "integration" {
+  rest_api_id             = aws_api_gateway_rest_api.api.id
+  resource_id             = aws_api_gateway_resource.resource.id
+  http_method             = aws_api_gateway_method.method.http_method
+  integration_http_method = "POST"
+  type                    = "AWS_PROXY"
+  uri                     = aws_lambda_function.lambdafun.invoke_arn
 
-  request_parameters = {
-    "integration.request.header.X-Authorization" = "'static'"
-  }
   # Transforms the incoming XML request to JSON
   request_templates = {
     "application/xml" = <<EOF

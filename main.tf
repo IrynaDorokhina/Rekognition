@@ -37,10 +37,18 @@ resource "aws_s3_bucket_notification" "trigger" {
     }
 }
 
-resource "aws_lambda_permission" "test" {
+resource "aws_lambda_permission" "s3_lambda_permission" {
     statement_id  = "AllowS3Invoke"
     action        = "lambda:InvokeFunction"
     function_name = aws_lambda_function.lambdafun.arn
     principal = "s3.amazonaws.com"
     source_arn = "arn:aws:s3:::images-2522"
+}
+
+resource "aws_lambda_permission" "apigw_lambda_permission" {
+  statement_id  = "AllowExecutionFromAPIGateway"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.lambdafun.arn
+  principal     = "apigateway.amazonaws.com"
+  source_arn = "arn:aws:execute-api:us-east-1::aws_api_gateway_rest_api.api.id/*/aws_api_gateway_method.method.http_methodaws_api_gateway_resource.resource.path"
 }

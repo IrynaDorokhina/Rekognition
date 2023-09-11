@@ -29,7 +29,7 @@ def lambda_handler(event, context):
 
     # Get the object from the event and show its content type
     bucket = event['query']['Records'][0]['s3']['bucket']['name']
-    key = urllib.parse.unquote_plus(event['Records'][0]['s3']['object']['key'], encoding='utf-8')
+    key = urllib.parse.unquote_plus(event['query']['Records'][0]['s3']['object']['key'], encoding='utf-8')
     
     dyndb = boto3.resource('dynamodb')
     
