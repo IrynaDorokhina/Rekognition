@@ -6,6 +6,13 @@ bucket = "images-2522"
     }
 }
 
+resource "aws_s3_bucket_object" "object" {
+  bucket = "images-2522"
+  key    = "images/"
+  #source = "/dev/null"
+  acl    = "private"
+}
+
 resource "aws_s3_bucket_acl" "s3_bucket_acl" {
     bucket = aws_s3_bucket.images-2522.id
     acl = "private"
