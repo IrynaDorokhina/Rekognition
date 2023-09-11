@@ -9,7 +9,7 @@ bucket = "images-2522"
 resource "aws_s3_bucket_object" "object" {
   bucket = "images-2522"
   key    = "images/"
-  #source = "/dev/null"
+  source = "/dev/null"
   acl    = "private"
 }
 

@@ -27,3 +27,20 @@ resource "aws_lambda_function" "lambdas3" {
     runtime = "python3.9"
     depends_on = [aws_iam_role_policy_attachment.attach_policy1]
 }
+
+resource "aws_s3_bucket_notification" "trigger" {
+    bucket = "images-2522"
+    lambda_function {
+        lambda_function_arn = aws_lambda_function.lambdafun.arn
+        events              = ["s3:ObjectCreated:*"]
+        filter_prefix       = "images/"
+    }
+}
+
+resource "aws_lambda_permission" "test" {
+    statement_id  = "AllowS3Invoke"
+    action        = "lambda:InvokeFunction"
+    function_name = aws_lambda_function.lambdafun.arn
+    principal = "s3.amazonaws.com"
+    source_arn = "arn:aws:s3:::images-2522"
+}
