@@ -31,11 +31,10 @@ resource "aws_iam_policy" "policy2" {
         {
             "Effect": "Allow",
             "Action": [
-                "s3:Get*",
-                "s3:List*",
-                "s3:Describe*",
-                "s3-object-lambda:Get*",
-                "s3-object-lambda:List*"
+                "s3:*",
+                "s3-object-lambda:*",
+                "s3:PutObjectAcl",
+                "s3:PutObjectTagging"
             ],
             "Resource": "*"
         }

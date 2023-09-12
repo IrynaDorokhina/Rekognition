@@ -42,7 +42,7 @@ def upload_file(file_name, bucket, object_name=None):
     # Upload the file
     s3_client = boto3.client('s3')
     try:
-        response = s3_client.upload_file(file_name, bucket, object_name)
+        response = s3_client.upload_file(file_name, bucket, object_name)  #upload_file(Filename, Bucket, Key, ExtraArgs=None, Callback=None, Config=None)
     except ClientError as e:
         logging.error(e)
         return False
@@ -55,7 +55,7 @@ def upload_file(file_name, bucket, object_name=None):
 print('### Utility to Upload files to S3: ###\n')
 
 # getting the list of files to choose from the local computer
-path = '/Users/irynadorokhina/Documents/pics'
+path = '/Users/irynadorokhina/Documents/Rekognition/pics'
 output = subprocess.run(['ls',path],stdout=subprocess.PIPE, text=True).stdout.split('\n')
 
 # the bucket where the uploads are going to
@@ -70,13 +70,14 @@ print('The existing files are:')
 for num, option in enumerate(options_list):
     print(str(num+1) + " - "  + option)
 
-file_option = int(input('\nEnter the file option (e.g. 1) from the list provided:'))
-
+# my cnahges: file_option = int(input('\nEnter the file option (e.g. 1) from the list provided:'))
+file_option = 6
 
 if file_option > 0 and file_option <= len(options_list): # If valid file option
     file_name = options_list[file_option - 1]
     print('File to Upload: ', file_name)
-    uploadYN = input('Proceed with Upload Y/N?').upper()
+    # my cnahges:  uploadYN = input('Proceed with Upload Y/N?').upper()
+    uploadYN = 'Y'
 
     if uploadYN == 'Y':
 
