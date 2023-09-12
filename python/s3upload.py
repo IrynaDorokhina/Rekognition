@@ -55,7 +55,7 @@ def upload_file(file_name, bucket, object_name=None):
 print('### Utility to Upload files to S3: ###\n')
 
 # getting the list of files to choose from the local computer
-path = '/Users/irynadorokhina/Documents/Rekognition/pics'
+path = '/Users/irynadorokhina/Documents/Rekognition/pics/'
 output = subprocess.run(['ls',path],stdout=subprocess.PIPE, text=True).stdout.split('\n')
 
 # the bucket where the uploads are going to
