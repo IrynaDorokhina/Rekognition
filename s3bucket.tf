@@ -38,8 +38,8 @@ resource "aws_s3_bucket_public_access_block" "images-2522" {
     block_public_policy = false
 }
 
-resource "aws_s3_bucket_object" "object" {
-  bucket = "images-2522"
+resource "aws_s3_object" "object" {
+  bucket = aws_s3_bucket.images-2522.id
   key    = "images"
   source = "/dev/null"
   acl    = "private"

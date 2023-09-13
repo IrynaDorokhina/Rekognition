@@ -1,5 +1,5 @@
 resource "aws_api_gateway_rest_api" "api" {
-  name = "myapi"
+  name = "api"
 }
 
 resource "aws_api_gateway_resource" "resource" {
@@ -25,7 +25,8 @@ resource "aws_api_gateway_integration" "integration" {
 
   # Transforms the incoming XML request to JSON
   request_templates = {
-    "application/xml" = <<EOF
+    #"application/xml" = <<EOF
+    "application/json" = <<EOF
 {
   "body" : $input.json('$'),
   "headers": {

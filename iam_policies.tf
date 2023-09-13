@@ -29,14 +29,23 @@ resource "aws_iam_policy" "policy2" {
     "Version": "2012-10-17",
     "Statement": [
         {
+            "Sid": "AllowAttachmentBucketWrite",
             "Effect": "Allow",
             "Action": [
                 "s3:*",
                 "s3-object-lambda:*",
                 "s3:PutObjectAcl",
-                "s3:PutObjectTagging"
+                "s3:PutObjectTagging",
+                "s3:PutObject",
+                "s3:AbortMultipartUpload",
+                "kms:Decrypt",
+                "kms:Encrypt",
+                "kms:GenerateDataKey"
             ],
-            "Resource": "*"
+            "Resource": [
+            "arn:aws:s3:::bucket-name/*",
+            "arn:aws:kms:kms-key-arn"
+            ]
         }
     ]
 }
