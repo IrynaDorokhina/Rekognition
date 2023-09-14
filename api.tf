@@ -1,4 +1,4 @@
-resource "aws_api_gateway_rest_api" "api" {
+/*resource "aws_api_gateway_rest_api" "api" {
     name = "api"
 }
 
@@ -50,4 +50,4 @@ resource "aws_api_gateway_integration" "integration" {
 }
 EOF
   }
-}
+}*/
