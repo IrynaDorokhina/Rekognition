@@ -4,8 +4,8 @@ resource "aws_dynamodb_table" "ImageLabels" {
     read_capacity= "5"
     write_capacity= "5"
     attribute {
-        name = "image"
+        name = "Image"
         type = "S"
     }
-    hash_key = "image"
+    hash_key = "Image"
 }

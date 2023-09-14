@@ -21,10 +21,10 @@ EOF
 }
 
 resource "aws_iam_policy" "policy2" {
-  name        = "policy_s3"
-  path        = "/"
-  description = "My test policy"
-  policy      = <<EOF
+    name        = "policy_s3"
+    path        = "/"
+    description = "My test policy"
+    policy      = <<EOF
 {
     "Version": "2012-10-17",
     "Statement": [
@@ -53,10 +53,10 @@ EOF
 }
 
 resource "aws_iam_policy" "policy3" {
-  name        = "policy_DB"
-  path        = "/"
-  description = "My test policy"
-  policy      = <<EOF
+    name        = "policy_DB"
+    path        = "/"
+    description = "My test policy"
+    policy      = <<EOF
 {
     "Version": "2012-10-17",
     "Statement": [
@@ -169,10 +169,10 @@ EOF
 }
 
 resource "aws_iam_policy" "policy4" {
-  name        = "policy_rekognition"
-  path        = "/"
-  description = "My test policy"
-  policy      = <<EOF
+    name        = "policy_rekognition"
+    path        = "/"
+    description = "My test policy"
+    policy      = <<EOF
 {
     "Version": "2012-10-17",
     "Statement": [
@@ -189,8 +189,8 @@ EOF
 }
 
 resource "aws_iam_role" "lambda_role" {
-name   = "lambda_role"
-assume_role_policy = <<EOF
+    name   = "lambda_role"
+    assume_role_policy = <<EOF
 {
  "Version": "2012-10-17",
  "Statement": [
@@ -208,21 +208,21 @@ EOF
 }
 
 resource "aws_iam_role_policy_attachment" "attach_policy1" {
-  role       = aws_iam_role.lambda_role.name
-  policy_arn = aws_iam_policy.policy1.arn
+    role       = aws_iam_role.lambda_role.name
+    policy_arn = aws_iam_policy.policy1.arn
 }
 
 resource "aws_iam_role_policy_attachment" "attach_policy2" {
-  role       = aws_iam_role.lambda_role.name
-  policy_arn = aws_iam_policy.policy2.arn
+    role       = aws_iam_role.lambda_role.name
+    policy_arn = aws_iam_policy.policy2.arn
 }
 
 resource "aws_iam_role_policy_attachment" "attach_policy3" {
-  role       = aws_iam_role.lambda_role.name
-  policy_arn = aws_iam_policy.policy3.arn
+    role       = aws_iam_role.lambda_role.name
+    policy_arn = aws_iam_policy.policy3.arn
 }
 
 resource "aws_iam_role_policy_attachment" "attach_policy4" {
-  role       = aws_iam_role.lambda_role.name
-  policy_arn = aws_iam_policy.policy4.arn
+    role       = aws_iam_role.lambda_role.name
+    policy_arn = aws_iam_policy.policy4.arn
 }
